@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/navk/appsec-toolkit/schema/threat_model_v1.json",
+  "title": "Threat Model",
+  "description": "Schema for the AppSec Toolkit structured threat model.",
+  "type": "object",
+  "required": ["version", "app", "components", "threats"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1",
+      "description": "Schema version; must be '1'."
+    },
+    "app": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name":        { "type": "string" },
+        "description": { "type": "string" },
+        "repo":        { "type": "string", "description": "URL or path to the source repository." },
+        "owner":       { "type": "string", "description": "Team or individual responsible for this app." }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "id":             { "type": "string", "description": "Short identifier, used in threat references." },
+          "name":           { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "web_app", "api", "database", "queue",
+              "external_service", "client", "identity_provider", "storage", "other"
+            ]
+          },
+          "trust_boundary": { "type": "string", "description": "ID of the trust boundary this component lives in." },
+          "description":    { "type": "string" }
+        }
+      }
+    },
+    "trust_boundaries": {
+      "type": "array",
+      "default": [],
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "additionalProperties": false,
+        "properties": {
+          "id":          { "type": "string" },
+          "name":        { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "threats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "stride", "components", "severity"],
+        "additionalProperties": false,
+        "properties": {
+          "id":    { "type": "string", "description": "Stable identifier, e.g. T-001." },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "stride": {
+            "type": "string",
+            "enum": [
+              "Spoofing",
+              "Tampering",
+              "Repudiation",
+              "Information Disclosure",
+              "Denial of Service",
+              "Elevation of Privilege"
+            ]
+          },
+          "components": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "description": "Component ID this threat applies to." }
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["Critical", "High", "Medium", "Low", "Info"]
+          },
+          "mitigations": {
+            "type": "array",
+            "default": [],
+            "items": { "type": "string" }
+          },
+          "test_cases": {
+            "type": "array",
+            "default": [],
+            "items": { "type": "string", "description": "Concrete test steps or check descriptions." }
+          },
+          "status": {
+            "type": "string",
+            "default": "open",
+            "enum": ["open", "mitigated", "accepted", "transferred", "wont_fix"]
+          },
+          "evidence": {
+            "type": "array",
+            "default": [],
+            "description": "Captured during testing; each entry links to a file or note.",
+            "items": {
+              "type": "object",
+              "required": ["path"],
+              "additionalProperties": false,
+              "properties": {
+                "path":      { "type": "string", "description": "Relative path to the evidence file." },
+                "note":      { "type": "string" },
+                "timestamp": { "type": "string", "format": "date-time" },
+                "result": {
+                  "type": "string",
+                  "enum": ["pass", "fail", "inconclusive"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
