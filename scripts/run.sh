@@ -8,6 +8,8 @@ if [[ -n "${ANTHROPIC_API_KEY:-}" ]]; then
 fi
 
 cd "$(dirname "$0")/.."
+git checkout main
+git pull origin main
 mkdir -p logs
 
 claude -p "$(cat GOAL.md)" \
