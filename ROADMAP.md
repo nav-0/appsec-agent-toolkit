@@ -1,8 +1,9 @@
 # Roadmap
 
 ## Approved — build next
-(empty — promote an item from Proposed below, or add your own, when
-ready for the agent to build it)
+- Add functionality to initialize multiple threat models
+- Add functionality to properly initialize threat model data
+- Add environment setup and usage instructions in README
 
 ## Proposed
 (agent adds candidates here when Approved is empty; maintainer decides
