@@ -1,7 +1,7 @@
 # AppSec Agent Toolkit
 
 A growing set of small, practical AppSec tools, built incrementally by
-an autonomous Claude Code agent under human PR review. See GOAL.md for
+an autonomous AI agent under human PR review. See GOAL.md for
 the agent's operating mandate.
 
 ---
