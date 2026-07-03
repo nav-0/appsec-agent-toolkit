@@ -18,7 +18,7 @@ def test_default_scaffold_single_default_component() -> None:
     m = build_scaffold("My App")
     assert len(m.components) == 1
     assert m.components[0].id == "app"
-    assert m.components[0].type == ComponentType.api
+    assert m.components[0].type == ComponentType.process
 
 
 def test_threats_reference_default_component() -> None:
@@ -34,16 +34,16 @@ def test_threat_ids_sequential() -> None:
 
 
 def test_custom_components_parsed() -> None:
-    m = build_scaffold("App", component_specs=["api:backend:Backend", "database:db:Primary DB"])
+    m = build_scaffold("App", component_specs=["process:backend:Backend", "data_store:db:Primary DB"])
     assert len(m.components) == 2
     assert m.components[0].id == "backend"
-    assert m.components[0].type == ComponentType.api
+    assert m.components[0].type == ComponentType.process
     assert m.components[1].id == "db"
-    assert m.components[1].type == ComponentType.database
+    assert m.components[1].type == ComponentType.data_store
 
 
 def test_custom_components_threats_reference_first() -> None:
-    m = build_scaffold("App", component_specs=["web_app:frontend", "database:db"])
+    m = build_scaffold("App", component_specs=["process:frontend", "data_store:db"])
     for t in m.threats:
         assert "frontend" in t.components
 
@@ -70,5 +70,5 @@ def test_threats_have_test_cases() -> None:
 
 def test_component_spec_two_part() -> None:
     """TYPE:ID without a name defaults name to the ID."""
-    m = build_scaffold("App", component_specs=["api:backend"])
+    m = build_scaffold("App", component_specs=["process:backend"])
     assert m.components[0].name == "backend"

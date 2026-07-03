@@ -23,8 +23,8 @@ pip install -e .
 # Create a starter threat model for a two-tier app:
 tm init "My API" \
     --description "REST API backed by Postgres" \
-    -c api:backend:Backend \
-    -c database:db:Primary\ DB \
+    -c process:backend:Backend \
+    -c data_store:db:Primary\ DB \
     -f threat-model.yaml
 
 # Review the threats at a glance:
@@ -46,6 +46,7 @@ model files. Fields of note:
 | Field | Description |
 |---|---|
 | `app` | App metadata (name, description, repo, owner) |
+| `components[].type` | `process` / `data_store` / `external_entity` / `other` (DFD element type) |
 | `components` | System components being modelled |
 | `trust_boundaries` | Logical security zones |
 | `threats[].stride` | STRIDE category |

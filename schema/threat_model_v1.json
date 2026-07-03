@@ -34,10 +34,8 @@
           "name":           { "type": "string" },
           "type": {
             "type": "string",
-            "enum": [
-              "web_app", "api", "database", "queue",
-              "external_service", "client", "identity_provider", "storage", "other"
-            ]
+            "enum": ["process", "data_store", "external_entity", "other"],
+            "description": "Role in the data-flow diagram. process = anything that transforms or acts on data (frontend, backend, microservice, monolith — deployment shape doesn't matter). data_store = anything that persists data at rest, even transiently (database, queue, cache, file storage). external_entity = anything outside this system's control boundary that data flows to/from (a user's client, a third-party API, an identity provider you don't operate). other = doesn't fit the above; explain why in the component's description field."
           },
           "trust_boundary": { "type": "string", "description": "ID of the trust boundary this component lives in." },
           "description":    { "type": "string" }

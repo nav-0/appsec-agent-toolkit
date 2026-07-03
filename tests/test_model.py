@@ -12,7 +12,7 @@ def _minimal_model() -> ThreatModel:
     return ThreatModel(
         version="1",
         app=App(name="Test App"),
-        components=[Component(id="api", name="API", type=ComponentType.api)],
+        components=[Component(id="api", name="API", type=ComponentType.process)],
         threats=[
             Threat(
                 id="T-001",

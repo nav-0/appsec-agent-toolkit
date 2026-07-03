@@ -149,7 +149,7 @@ def build_scaffold(
             )
     else:
         components = [
-            Component(id="app", name=name, type=ComponentType.api)
+            Component(id="app", name=name, type=ComponentType.process)
         ]
 
     # All example threats reference the first component by default.

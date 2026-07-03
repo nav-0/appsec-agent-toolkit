@@ -8,14 +8,9 @@ from pydantic import BaseModel, Field
 
 
 class ComponentType(str, Enum):
-    web_app = "web_app"
-    api = "api"
-    database = "database"
-    queue = "queue"
-    external_service = "external_service"
-    client = "client"
-    identity_provider = "identity_provider"
-    storage = "storage"
+    process = "process"
+    data_store = "data_store"
+    external_entity = "external_entity"
     other = "other"
 
 

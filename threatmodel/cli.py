@@ -57,8 +57,7 @@ def cli() -> None:
     metavar="TYPE:ID[:NAME]",
     help=(
         "Component to add. Repeatable. Format: TYPE:ID or TYPE:ID:Name. "
-        "TYPE must be one of: web_app, api, database, queue, external_service, "
-        "client, identity_provider, storage, other."
+        "TYPE must be one of: process, data_store, external_entity, other."
     ),
 )
 @click.option(
@@ -86,7 +85,7 @@ def init_cmd(
     \b
     Examples:
       tm init "My API"
-      tm init "My API" -c api:backend:Backend -c database:db:Primary\\ DB -f myapp.yaml
+      tm init "My API" -c process:backend:Backend -c data_store:db:Primary\\ DB -f myapp.yaml
     """
     out = Path(output)
     if out.exists() and not force:
